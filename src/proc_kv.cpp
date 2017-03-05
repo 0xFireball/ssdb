@@ -2,6 +2,8 @@
 Copyright (c) 2012-2014 The SSDB Authors. All rights reserved.
 Use of this source code is governed by a BSD-style license that can be
 found in the LICENSE file.
+
+Copyright (c) 2017 0xFireball. All rights reserved.
 */
 /* kv */
 #include "serv.h"
@@ -119,6 +121,15 @@ int proc_exists(NetworkServer *net, Link *link, const Request &req, Response *re
 	const Bytes key = req[1];
 	std::string val;
 	int ret = serv->ssdb->get(key, &val);
+	if (!ret) {
+		// check hash sets
+		uint64_t limit = UINT64_MAX;
+		std::vector<std::string> list;
+		serv->ssdb->hlist("", "", limit, &list);
+		if(std::find(list.begin(), list.end(), key) != list.end()) {
+			ret = 1;
+		}
+	}
 	resp->reply_bool(ret);
 	return 0;
 }

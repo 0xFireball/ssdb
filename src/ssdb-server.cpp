@@ -10,7 +10,7 @@ found in the LICENSE file.
 #include "util/app.h"
 #include "serv.h"
 
-#define APP_NAME "ssdb-server"
+#define APP_NAME "ssdb-server, 0xFireball fork"
 #define APP_VERSION SSDB_VERSION
 
 class MyApplication : public Application
@@ -24,6 +24,7 @@ public:
 void MyApplication::welcome(){
 	fprintf(stderr, "%s %s\n", APP_NAME, APP_VERSION);
 	fprintf(stderr, "Copyright (c) 2012-2015 ssdb.io\n");
+	fprintf(stderr, "Copyright (c) 2017 0xFireball\n");
 	fprintf(stderr, "\n");
 }
 
